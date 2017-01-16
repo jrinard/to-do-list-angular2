@@ -1,7 +1,7 @@
 //ROOT COMPONENT
 import { Component } from '@angular/core';
 
-//Part 1 COMPONENT ANNOTATION - determines how it APPEARS
+//Part 1 COMPONENT ANNOTATION - determines how it APPEARS // this is our VIEW
 @Component({ // defines new component should have functionalities outlines in the above imported component
   selector: 'app-root', // defines the specific tag to render within.
   template: `
@@ -22,9 +22,14 @@ export class AppComponent {
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
-  firstTask = {
-    description: "Finish weekend Angular homework for Epicodus course"
-  }
+  //new task constructor to create our first task object
+  //define firstTask variable as the Task type because we exported task below we can
+  firstTask: Task = new Task("Finish weekend Angular homework for Epicodus course");
+}
+//class declaration is our MODEL which is also data
+export class Task {
+  public done: boolean = false;
+  constructor(public description: string) { }
 }
 
 
