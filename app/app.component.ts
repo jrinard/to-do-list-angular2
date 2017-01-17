@@ -9,10 +9,26 @@ import { Component } from '@angular/core';
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
    <h3>{{currentFocus}}</h3>
    <ul> <!-- [class] is a property binding--><!-- ngfor is a repeater DIRECTIVE --> <!-- tasks is the array and it is assigning each iteration to currentTask temporarly -->
-     <li [class]="priorityColor(currentTask)" (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button class="btn btn-xs" (click)="editTask()">Edit</button></li><!-- assigning li tag to a loop/repeater // button is called an event binding-->
+     <li [class]="priorityColor(currentTask)"
+         (click)="isDone(currentTask)"
+         *ngFor="let currentTask of tasks">{{currentTask.description}}
+         <button class="btn btn-xs" (click)="editTask(currentTask)">Edit</button></li><!-- assigning li tag to a loop/repeater // button is called an event binding-->
    </ul>
-  </div>
-  `
+   <hr>
+       <div>
+        <h3>{{selectedTask.description}}</h3>
+        <p>Task Complete? {{selectedTask.done}}</p>
+       <h3>Edit Task</h3>
+       <label>Enter Task Description:</label>
+       <input [(ngModel)]="selectedTask.description"><!-- ngModel is a event and property binding// assigning input to description-->
+        <label>Enter Task Priority (1-3):</label>
+        <br>
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low Priority)<br><!-- radio buttons require predefined values to select from. -->
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium Priority)<br>
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High Priority)
+       </div>
+      </div>
+     `
 })
 
 //Part 2 COMPONENT CLASS DEFINITION -- determines how it BEHAVES //Back-End
@@ -28,10 +44,11 @@ export class AppComponent {
     new Task('Begin brainstorming possible JavaScript group projects', 2),
     new Task('Add README file to last few Angular repos on GitHub', 3)
   ];
+  selectedTask: Task = this.tasks[0];
 
   // editTask statement must be defined in the component class
-  editTask() {
-    alert("You just requested to edit a Task! ");
+  editTask(clickedTask) {
+    this.selectedTask = clickedTask;
   }
 
   isDone(clickedTask: Task) {
@@ -51,7 +68,7 @@ export class AppComponent {
       return "bg-info";
     }
   }
-}
+} // end appcomponent
 
 
 //class declaration is our MODEL which holds our data // CONSTRUCTOR
