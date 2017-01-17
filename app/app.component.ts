@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
    <h3>{{currentFocus}}</h3>
    <ul> <!-- repeater DIRECTIVE --> <!-- tasks is the array and it is assigning each iteration to currentTask temporarly -->
-     <li *ngFor="let currentTask of tasks">{{currentTask.description}}</li><!-- assigning li tag to a loop/repeater -->
+     <li *ngFor="let currentTask of tasks">{{currentTask.description}} <button class="btn btn-xs" (click)="editTask()">Edit</button></li><!-- assigning li tag to a loop/repeater // button is called an event binding-->
    </ul>
   </div>
   `
@@ -28,6 +28,10 @@ export class AppComponent {
     new Task('Begin brainstorming possible JavaScript group projects'),
     new Task('Add README file to last few Angular repos on GitHub')
   ];
+
+  editTask() {
+    alert("works");
+  }
 
 
 }
