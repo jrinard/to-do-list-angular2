@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   currentFocus: string = 'Angular Homework'; // Dynamic value
   currentTime = new Date();
-  month: number = this.currentTime.getMonth() + 1;
+  month: number = this.currentTime.getMonth() + 1; //TIP when a variable in a component's class declaration references another variable in the class, it must be prefaced with the "this" keyword.
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
   //new task constructor to create our task object
@@ -28,12 +28,13 @@ export class AppComponent {
     new Task('Begin brainstorming possible JavaScript group projects'),
     new Task('Add README file to last few Angular repos on GitHub')
   ];
+
+
 }
-//class declaration is our MODEL which holds our data
+
+
+//class declaration is our MODEL which holds our data // CONSTRUCTOR
 export class Task {
   public done: boolean = false;
   constructor(public description: string) { }
 }
-
-
-//TIP when a variable in a component's class declaration references another variable in the class, it must be prefaced with the "this" keyword.
