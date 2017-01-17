@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
   <div class="container">
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
    <h3>{{currentFocus}}</h3>
-   <ul> <!-- ngfor is a repeater DIRECTIVE --> <!-- tasks is the array and it is assigning each iteration to currentTask temporarly -->
-     <li (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button class="btn btn-xs" (click)="editTask()">Edit</button></li><!-- assigning li tag to a loop/repeater // button is called an event binding-->
+   <ul> <!-- [class] is a property binding--><!-- ngfor is a repeater DIRECTIVE --> <!-- tasks is the array and it is assigning each iteration to currentTask temporarly -->
+     <li [class]="priorityColor(currentTask)" (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button class="btn btn-xs" (click)="editTask()">Edit</button></li><!-- assigning li tag to a loop/repeater // button is called an event binding-->
    </ul>
   </div>
   `
@@ -24,9 +24,9 @@ export class AppComponent {
   year: number = this.currentTime.getFullYear();
   //new task constructor to create our task object
   tasks: Task[] = [
-    new Task('Finish weekend Angular homework for Epicodus course'),
-    new Task('Begin brainstorming possible JavaScript group projects'),
-    new Task('Add README file to last few Angular repos on GitHub')
+    new Task('Finish weekend Angular homework for Epicodus course', 1),
+    new Task('Begin brainstorming possible JavaScript group projects', 2),
+    new Task('Add README file to last few Angular repos on GitHub', 3)
   ];
 
   // editTask statement must be defined in the component class
@@ -41,11 +41,21 @@ export class AppComponent {
       alert("Task NOT Done");
     }
   }
+
+  priorityColor(currentTask){
+    if (currentTask.priority === 3){
+      return "bg-danger";
+    } else if (currentTask.priority === 2) {
+      return "bg-warning";
+    } else {
+      return "bg-info";
+    }
+  }
 }
 
 
 //class declaration is our MODEL which holds our data // CONSTRUCTOR
 export class Task {
   public done: boolean = false;
-  constructor(public description: string) { }
+  constructor(public description: string, public priority: number) { }
 }
