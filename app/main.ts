@@ -1,7 +1,7 @@
 //ENTRY POINT - Loads our root module, which then loads our root component
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module';// imports app.module
 
 const platform = platformBrowserDynamic();
 
